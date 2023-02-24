@@ -1908,7 +1908,7 @@ static  void  FTPs_ProcessCtrlCmd (FTPs_SESSION_STRUCT  *ftp_session)
 
                  for (i = 0; i <= 3; i++) {
                      dig = ASCII_IsDig(*ftp_session->CtrlCmdArgs);
-                     while ((dig == DEF_NO) && (ftp_session->CtrlCmdArgs != (CPU_CHAR *)0)) {
+                     while ((dig == DEF_NO) && (ftp_session->CtrlCmdArgs != (CPU_CHAR *)0) && (*ftp_session->CtrlCmdArgs != 0)) {
                          ftp_session->CtrlCmdArgs++;
                          dig = ASCII_IsDig(*ftp_session->CtrlCmdArgs);
                      }
@@ -1916,7 +1916,7 @@ static  void  FTPs_ProcessCtrlCmd (FTPs_SESSION_STRUCT  *ftp_session)
                  }
                  for (i = 0; i <= 1; i++) {
                      dig = ASCII_IsDig(*ftp_session->CtrlCmdArgs);
-                     while ((dig == DEF_NO) && (ftp_session->CtrlCmdArgs != 0)) {
+                     while ((dig == DEF_NO) && (ftp_session->CtrlCmdArgs != 0) && (*ftp_session->CtrlCmdArgs != 0)) {
                          ftp_session->CtrlCmdArgs++;
                          dig = ASCII_IsDig(*ftp_session->CtrlCmdArgs);
                      }
