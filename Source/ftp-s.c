@@ -323,12 +323,12 @@ CPU_BOOLEAN  FTPs_Init (       NET_IPv4_ADDR     public_addr,
                                NET_PORT_NBR      public_port,
                         const  FTPs_SECURE_CFG  *p_secure_cfg)
 {
-    CPU_BOOLEAN  rtn_val;
-    CPU_INT32U   path_len_max;
-    NET_SOCK_ID  ctrl_sock_id;
-    CPU_INT32U   max_path_name_len;
-    CPU_SIZE_T   heap_rem_size;
-    LIB_ERR      lib_err;
+            CPU_BOOLEAN  rtn_val;
+            CPU_INT32U   path_len_max;
+    static  NET_SOCK_ID  ctrl_sock_id;
+            CPU_INT32U   max_path_name_len;
+            CPU_SIZE_T   heap_rem_size;
+            LIB_ERR      lib_err;
     CPU_SR_ALLOC();
 
 
@@ -994,7 +994,7 @@ void  FTPs_CtrlTask (void  *p_arg)
                                                                 /* Determine if the command entered is compatible with  */
                                                                 /* the current state (context check).                   */
         if (FTPs_Cmd[ftp_session.CtrlCmd].CmdCntxt[ftp_session.CtrlState] == DEF_OFF) {
-            if (ftp_session.CtrlState == FTPs_STATE_LOGOUT) {
+            if (ftp_session.CtrlState != FTPs_STATE_LOGIN) {
                 FTPs_SendReply(ftp_session.CtrlSockID, FTP_REPLY_NOTLOGGEDIN, (CPU_CHAR *)0);
             } else {
                 FTPs_SendReply(ftp_session.CtrlSockID, FTP_REPLY_CMDBADSEQUENCE, (CPU_CHAR *)0);
